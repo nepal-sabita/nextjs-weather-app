@@ -37,9 +37,10 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
-  }, [city]);
-
+  }, []);
+//getting all data
   const fetchData = (city: string, latitude: number, longitude: number) => {
+    //getting fivedays weather
     getWeatherData(city, latitude, longitude)
       .then(data => {
         const nextFiveDaysData = data.list.filter((item: any) => {//filtering the data inorder to get data according to local time
@@ -49,7 +50,7 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
           nextFiveDays.setDate(currentDate.getDate() + 5);
 
           // Filtering out 3-hour interval data to keep daily data for 5 days
-          return itemDate.getHours() === 12 && itemDate > currentDate && itemDate <= nextFiveDays;
+          return itemDate.getHours() ===  9 && itemDate > currentDate && itemDate <= nextFiveDays;
         });
 
         weatherStore.setFiveDaysWeatherData(nextFiveDaysData);//process fivedays weather
@@ -57,7 +58,7 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
       .catch(error => {
         console.error('Error getting weather data:', error);
       });
-
+//getting current weather
     getCurrentData(city, latitude, longitude)
       .then(dataCurrent => {
         // Process current weather data
@@ -67,31 +68,23 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
         console.error('Error getting current weather data:', error);
       });
   };
-  const debounce = (func: Function, delay: number) => {
-    let timer: any;
-    return (...args: any) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(this, args);
-      }, delay);
-    };
-  };
-//debouncing inorder to limit time to avoid too many api request while the user is typing
-  const debouncedFetchData = debounce(fetchData, 500);
+//function for  search button
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
-    debouncedFetchData(city, latitude, longitude);
-  };
 
+  };
+//function foe searching city
   const handleSearch = () => {
     if (city.trim() !== '') {
-      onCityChange(city, latitude, longitude);
+      
       fetchData(city, latitude, longitude);
+      onCityChange(city, latitude, longitude);
     } else {
       console.log('Please enter a valid city name');
       alert('Please enter a valid city');
     }
   };
+  //render
   return (
     <div className={styles.allWeather}>
     <div className={styles.searchBox}>
