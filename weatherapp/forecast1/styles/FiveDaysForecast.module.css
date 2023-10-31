@@ -1,14 +1,14 @@
-/* Default styles for flex items */
+
 .flexItems {
   border: 1px;
   padding: 10px;
   box-shadow: 5px 10px 5px 15px black;
   border-radius: 10px;
   background-color: #2C5D87;
-  transition: background-color 0.3s ease; /* Add a smooth transition effect for background color change */
+  transition: background-color 0.3s ease; /* Add a  transition effect for background color change */
 }
 
-/* Hover effect for flex items */
+/* Hover for flex items */
 .flexItems:hover {
   background-color: #1a3a57; /* Change background color on hover */
 }
@@ -20,18 +20,18 @@
   gap: 20px;
   flex-wrap: wrap;
   padding: 15px; /* Increase padding for a pop-up effect */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .flexContainer {
     flex-direction: column; /* Change flex direction to column on smaller screens */
-    align-items: center; /* Center items in a column layout */
+    align-items: center; 
   }
 
   .flexItems {
-    width: 100%; /* Make flex items take up full width on smaller screens */
-    margin-bottom: 20px; /* Add margin between flex items in a column layout */
+    width: 100%; /* Making flex items take up full width on smaller screens */
+    margin-bottom: 20px; 
   }
 }

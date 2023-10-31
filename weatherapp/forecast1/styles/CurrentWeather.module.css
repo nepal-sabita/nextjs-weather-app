@@ -1,40 +1,39 @@
 .currentBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    border: 2px solid rgba(255, 255, 255, 0.5); /* Transparent white border */
-    padding: 20px; /* Adding padding inside the box */
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Transparent white border */
+  padding: 20px; 
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
+}
+
+.weatherIcon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.weatherInfoRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.weatherInfo {
+  margin: 0 10px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .currentBox {
+    flex-direction: column; /* Change flex direction to column on smaller screens */
+    align-items: center; 
   }
-  
-  .weatherIcon {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 10px;
-  }
-  
+
   .weatherInfoRow {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column; /* Change flex direction to column for weather information items */
+    margin-top: 10px; 
   }
-  
-  .weatherInfo {
-    margin: 0 10px;
-  }
-  
-  /* Media query for smaller screens */
-  @media (max-width: 768px) {
-    .currentBox {
-      flex-direction: column; /* Change flex direction to column on smaller screens */
-      align-items: center; /* Center items in a column layout */
-    }
-  
-    .weatherInfoRow {
-      flex-direction: column; /* Change flex direction to column for weather information items */
-      margin-top: 10px; /* Add margin between weather information items in a column layout */
-    }
-  }
-  
+}

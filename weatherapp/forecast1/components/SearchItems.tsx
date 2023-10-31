@@ -7,6 +7,7 @@ import { GetServerSideProps } from 'next';
 import getCurrentData from '../pages/api/currentapi';
 import CurrentWeatherComponent from './CurrentWeatherComponent';
 import FiveDaysForecastComponent from './FiveDaysForecastComponent';
+import validateCity from'./CityValidation';
 
 interface SearchItemsProps {
   onCityChange: (city: string, latitude: number, longitude: number) => void;//props
@@ -38,7 +39,8 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
       console.error('Geolocation is not supported by this browser.');
     }
   }, []);
-//getting all data
+//getting all data()
+
   const fetchData = (city: string, latitude: number, longitude: number) => {
     //getting fivedays weather
     getWeatherData(city, latitude, longitude)
@@ -50,7 +52,7 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
           nextFiveDays.setDate(currentDate.getDate() + 5);
 
           // Filtering out 3-hour interval data to keep daily data for 5 days
-          return itemDate.getHours() ===  9 && itemDate > currentDate && itemDate <= nextFiveDays;
+          return itemDate.getHours() ===  6 && 18 && itemDate > currentDate && itemDate <= nextFiveDays;
         });
 
         weatherStore.setFiveDaysWeatherData(nextFiveDaysData);//process fivedays weather
@@ -67,22 +69,31 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
       .catch(error => {
         console.error('Error getting current weather data:', error);
       });
+      
   };
 //function for  search button
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
 
   };
+  //fetching only valid city for user validation
 //function foe searching city
-  const handleSearch = () => {
+  const handleSearch =async () => {
     if (city.trim() !== '') {
-      
-      fetchData(city, latitude, longitude);
-      onCityChange(city, latitude, longitude);
-    } else {
+      const isValidCity=await validateCity(city);
+      if (isValidCity) {
+        fetchData(city, latitude, longitude);
+        onCityChange(city, latitude, longitude);
+      } else {
+        // Display an error message and prevent further actions
+        console.log('Invalid city. Please enter a valid city name.');
+        alert('The city is invalid. Please enter a valid city name');
+      }
+  }
+      else {
       console.log('Please enter a valid city name');
       alert('Please enter a valid city');
-    }
+  }
   };
   //render
   return (
