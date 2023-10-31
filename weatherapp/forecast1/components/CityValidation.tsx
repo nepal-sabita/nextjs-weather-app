@@ -8,7 +8,7 @@ const validateCity = async (city: string): Promise<boolean> => {
     // If the API call is successful, the city is valid
     return response.ok && data.cod === 200;
   } catch (error) {
-    // Handle errors, e.g., network issues, API errors
+    // Handle errors API errors
     console.error('Error validating city:', error);
     return false;
   }
