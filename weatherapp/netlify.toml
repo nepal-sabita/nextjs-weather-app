@@ -1,4 +1,4 @@
 [build]
-base = "forecast"
+base = "forecast1"
 command = "npm run build"
-publish = "forecast/.next"
+publish = "forecast1/.next"
