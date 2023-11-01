@@ -1,0 +1,4 @@
+[build]
+base = "forecast"
+command = "npm run build"
+publish = "forecast/.next"
