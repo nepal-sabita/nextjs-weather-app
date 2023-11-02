@@ -1,0 +1,5 @@
+[build]
+base = "forecast1"
+command = "npm run build"
+publish = "forecast1/.next"
+functions = "forecast1/pages/api"

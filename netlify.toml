@@ -1,5 +1,0 @@
-[build]
-base = "weatherapp/forecast1"
-command = "npm run build"
-publish = "weatherapp/forecast1/.next"
-functions = "weatherapp/forecast1/pages/api"
