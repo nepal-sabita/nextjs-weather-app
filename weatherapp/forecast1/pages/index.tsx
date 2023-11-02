@@ -19,26 +19,6 @@ const Index: React.FC = () => {
     setCity(newCity);
 
     // Fetch current weather and five days forecast when the city is changed
-    if (newCity.trim() !== '') {
-      getCurrentData(newCity,newLatitude,newLongitude)
-        .then(dataCurrent => {
-          // Process data to extract current weather ddata
-          setCurrentWeather(dataCurrent);
-        })
-        .catch(error => {
-          console.error('Error getting current data:', error);
-        });
-      }
-      // Fetch five days weather forecast
-      
-      getWeatherData(newCity,newLatitude,newLongitude)
-        .then(data => {
-        
-          setFiveDaysWeatherData(data);
-        })
-        .catch(error => {
-          console.error('Error getting fiveDays weather data:', error);
-        });
       
   };
 
