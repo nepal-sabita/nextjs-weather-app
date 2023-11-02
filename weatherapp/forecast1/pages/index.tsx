@@ -12,10 +12,35 @@ import Image from '../public/images/weatherCloud.png';
 
 const Index: React.FC = () => {
   const [city, setCity] = useState<string>('');
-  const handleCityChange = (newCity: string) => {
+  const [currentWeather, setCurrentWeather] = useState<any>(null);
+  const [fiveDaysWeatherData, setFiveDaysWeatherData] = useState<any[]>([]);
+const [isVisible,setIsVisible]=useState<boolean>(false);
+  const handleCityChange = (newCity: string,newLatitude:number,newLongitude:number) => {
     setCity(newCity);
 
     // Fetch current weather and five days forecast when the city is changed
+    if (newCity.trim() !== '') {
+      getCurrentData(newCity,newLatitude,newLongitude)
+        .then(dataCurrent => {
+          // Process data to extract current weather ddata
+          setCurrentWeather(dataCurrent);
+        })
+        .catch(error => {
+          console.error('Error getting current data:', error);
+        });
+      }
+      // Fetch five days weather forecast
+      
+      getWeatherData(newCity,newLatitude,newLongitude)
+        .then(data => {
+        
+          setFiveDaysWeatherData(data);
+          setIsVisible(true);
+        })
+        .catch(error => {
+          console.error('Error getting fiveDays weather data:', error);
+        });
+      
   };
 
   return (
@@ -26,6 +51,14 @@ const Index: React.FC = () => {
       <img src='images/weatherCloud.png' alt='weatherCloud' className={styles.weatherCloud}/>
       <h1 className={styles.h1}>Weather Forecast</h1>
       <SearchItems onCityChange={handleCityChange} />
+      {/* {currentWeather && (
+        <div className={styles.currentBox}>
+        </div>
+      )} */}
+      {/* {fiveDaysWeatherData.length > 0 && (
+        <div className={styles.forecastContainer}>
+        </div>
+      )} */}
     </div>
   );
 };
