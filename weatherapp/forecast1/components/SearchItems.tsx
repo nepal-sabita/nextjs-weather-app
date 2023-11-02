@@ -52,7 +52,7 @@ const SearchItems: React.FC<SearchItemsProps> =observer( ({ onCityChange }) => {
           nextFiveDays.setDate(currentDate.getDate() + 5);
 
           // Filtering out 3-hour interval data to keep daily data for 5 days
-          return itemDate.getHours() ===  6 && 18 && itemDate > currentDate && itemDate <= nextFiveDays;
+          return itemDate.getHours() ===  6 && itemDate > currentDate && itemDate <= nextFiveDays;
         });
 
         weatherStore.setFiveDaysWeatherData(nextFiveDaysData);//process fivedays weather
